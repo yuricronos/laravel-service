@@ -1,17 +1,31 @@
 {
-    "name": "yuricronos/laravel-service",
+    "name": "yuricronos/laravelservice",
     "description": "enable \"make:service\" command",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Yuri\\LaravelService\\": "src/"
-        }
-    },
     "authors": [
         {
-            "name": "Yuricronos"
+            "name": "Yuricronos",
+            "email": "yuricronos@gmail.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Yuricronos\\LaravelService\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2|^8.3",
+        "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+        "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+        "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yuricronos\\LaravelService\\LaravelServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
 }
