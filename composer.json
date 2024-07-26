@@ -1,0 +1,17 @@
+{
+    "name": "yuricronos/laravel-service",
+    "description": "enable \"make:service\" command",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yuri\\LaravelService\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yuricronos"
+        }
+    ],
+    "require": {}
+}
