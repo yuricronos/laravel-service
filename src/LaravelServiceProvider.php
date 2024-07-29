@@ -4,6 +4,7 @@ namespace Yuricronos\LaravelService;
 
 use Illuminate\Support\ServiceProvider;
 use Yuricronos\LaravelService\Console\MakeServiceCommand;
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -30,6 +31,7 @@ class LaravelServiceProvider extends ServiceProvider
                 Livewire::setUpdateRoute(fn ($handle) => Route::post($path, $handle));
             }
 
+            // this function is only used for the personalized laravel boilerplate 
             BladeDirective::createDirective();
 
             URL::forceRootUrl(config('lrvlsrvce.app_url'));
