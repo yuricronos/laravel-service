@@ -18,8 +18,10 @@ class LaravelServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->commands([MakeServiceCommand::class]);
+        if ($this->app instanceof LaravelApplication) {
+            if ($this->app->runningInConsole()) {
+                $this->commands([MakeServiceCommand::class]);
+            }
 
             $source = realpath($raw = __DIR__ . '/../config/lrvlsrvce.php') ?: $raw;
             $this->publishes([$source => $this->app->configPath('lrvlsrvce.php')]);
