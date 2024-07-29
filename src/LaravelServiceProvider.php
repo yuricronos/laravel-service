@@ -2,8 +2,9 @@
 
 namespace Yuricronos\LaravelService;
 
-use Illuminate\Support\ServiceProvider;
 use Yuricronos\LaravelService\Console\MakeServiceCommand;
+use Yuricronos\LaravelService\Services\ApiService;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,6 @@ class LaravelServiceProvider extends ServiceProvider
     public function register()
     {
         // 
+        $this->app->singleton(ApiService::class, fn ($app) => new ApiService());
     }
 }

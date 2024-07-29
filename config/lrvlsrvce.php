@@ -14,8 +14,10 @@ return [
      */
     'livewire_update' => '/livewire/update',
 
+    /**
+     * third party api url and token 
+     */
     'api_url' => env('BUDGET_API', null),
-
     'api_token' => env('BUDGET_BASIC_AUTH_TOKEN', null)
 
 ];

@@ -13,10 +13,14 @@ class ApiService
         'Accept'        => 'application/json',
     ];
 
+    private $options = [];
+
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => config('lrvlsrvce.api_url')]);
+        $api_url = config('lrvlsrvce.api_url');
+        $this->client = new Client(['base_uri' => $api_url]);
         $this->headers['Authorization'] .= config('lrvlsrvce.api_token');
+        $this->options = ['headers' => $this->headers];
     }
 
     public function getData(string $endpoint = "")
@@ -32,7 +36,11 @@ class ApiService
     public function postData(string $endpoint = "", array $data = [])
     {
         try {
-            $response = $this->client->request('POST', $endpoint, ['headers' => $this->headers, 'json' => $data]);
+            if (count($data) > 0) {
+                $this->options['json'] = $data;
+            }
+            $path = sprintf("%s%s", $this->client->getConfig('base_uri')->getPath(), $endpoint);
+            $response = $this->client->request('POST', $path, $this->options);
             return json_decode($response->getBody()->getContents(), true);
         } catch (\Exception $e) {
             return null;
