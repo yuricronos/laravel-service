@@ -21,7 +21,7 @@ class LaravelServiceProvider extends ServiceProvider
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
             $this->commands([MakeServiceCommand::class]);
 
-            $source = realpath($raw = __DIR__ . '/../config/lrvlsrvce.php') ?? $raw;
+            $source = realpath($raw = __DIR__ . '/../config/lrvlsrvce.php') ?: $raw;
             $this->publishes([$source => $this->app->configPath('lrvlsrvce.php')]);
             $this->mergeConfigFrom($source, 'lrvlsrvce');
 
