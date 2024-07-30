@@ -7,8 +7,7 @@ use Yuricronos\LaravelService\Services\ApiService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
+use Yuricronos\LaravelService\Features\Livewire\SupportLivewireManager;
 
 class LaravelServiceProvider extends ServiceProvider
 {
@@ -29,10 +28,7 @@ class LaravelServiceProvider extends ServiceProvider
             $this->mergeConfigFrom($source, 'lrvlsrvce');
 
             $appRoot = config('lrvlsrvce.app_root');
-            if (!empty($appRoot)) {
-                $path = sprintf("/%s%s", $appRoot, config('lrvlsrvce.livewire_update'));
-                Livewire::setUpdateRoute(fn ($handle) => Route::post($path, $handle));
-            }
+            SupportLivewireManager::buildRouting($appRoot);
 
             // this function is only used for the personalized laravel boilerplate 
             BladeDirective::createDirective();
