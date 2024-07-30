@@ -17,7 +17,7 @@ return [
     /**
      * third party api url and token 
      */
-    'api_url' => env('BUDGET_API', null),
-    'api_token' => env('BUDGET_BASIC_AUTH_TOKEN', null)
+    'api_url' => env('THIRD_PARTY_API', null),
+    'api_token' => env('THIRD_PARTY_API_TOKEN', null)
 
 ];
