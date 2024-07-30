@@ -3,8 +3,8 @@
 namespace Yuricronos\LaravelService\Features\Livewire;
 
 use Illuminate\Support\Facades\Route;
-use Livewire\Features\SupportFileUploads\FilePreviewController;
-use Livewire\Features\SupportFileUploads\FileUploadController;
+// use Livewire\Features\SupportFileUploads\FilePreviewController;
+// use Livewire\Features\SupportFileUploads\FileUploadController;
 use Livewire\Livewire;
 use Livewire\Mechanisms\HandleRequests\HandleRequests;
 
@@ -23,7 +23,7 @@ class SupportLivewireManager
         );
 
         Route::post($updatePath, [HandleRequests::class, 'handleUpdate'])->name('livewire.update');
-        Route::post('/payroll/livewire/upload-file', [FileUploadController::class, 'handle'])->name('livewire.upload-file');
-        Route::get('/livewire/preview-file/{filename}', [FilePreviewController::class, 'handle'])->name('livewire.preview-file');
+        // Route::post('/livewire/upload-file', [FileUploadController::class, 'handle'])->name('livewire.upload-file');
+        // Route::get('/livewire/preview-file/{filename}', [FilePreviewController::class, 'handle'])->name('livewire.preview-file');
     }
 }
