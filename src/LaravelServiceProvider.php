@@ -7,8 +7,8 @@ use Yuricronos\LaravelService\Services\ApiService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
+use Yuricronos\LaravelService\Console\MakePageCommand;
+use Yuricronos\LaravelService\Features\Livewire\SupportLivewireManager;
 
 class LaravelServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ class LaravelServiceProvider extends ServiceProvider
     {
         if ($this->app instanceof LaravelApplication) {
             if ($this->app->runningInConsole()) {
-                $this->commands([MakeServiceCommand::class]);
+                $this->commands([MakeServiceCommand::class, MakePageCommand::class]);
             }
 
             $source = realpath($raw = __DIR__ . '/../config/lrvlsrvce.php') ?: $raw;
@@ -29,10 +29,7 @@ class LaravelServiceProvider extends ServiceProvider
             $this->mergeConfigFrom($source, 'lrvlsrvce');
 
             $appRoot = config('lrvlsrvce.app_root');
-            if (!empty($appRoot)) {
-                $path = sprintf("/%s%s", $appRoot, config('lrvlsrvce.livewire_update'));
-                Livewire::setUpdateRoute(fn ($handle) => Route::post($path, $handle));
-            }
+            SupportLivewireManager::buildRouting($appRoot);
 
             // this function is only used for the personalized laravel boilerplate 
             BladeDirective::createDirective();
@@ -52,6 +49,6 @@ class LaravelServiceProvider extends ServiceProvider
     public function register()
     {
         // 
-        $this->app->singleton(ApiService::class, fn ($app) => new ApiService());
+        $this->app->singleton(ApiService::class, fn($app) => new ApiService());
     }
 }
