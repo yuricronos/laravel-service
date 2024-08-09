@@ -7,6 +7,7 @@ use Yuricronos\LaravelService\Services\ApiService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\Facades\URL;
+use Yuricronos\LaravelService\Console\MakePageCommand;
 use Yuricronos\LaravelService\Features\Livewire\SupportLivewireManager;
 
 class LaravelServiceProvider extends ServiceProvider
@@ -20,7 +21,7 @@ class LaravelServiceProvider extends ServiceProvider
     {
         if ($this->app instanceof LaravelApplication) {
             if ($this->app->runningInConsole()) {
-                $this->commands([MakeServiceCommand::class]);
+                $this->commands([MakeServiceCommand::class, MakePageCommand::class]);
             }
 
             $source = realpath($raw = __DIR__ . '/../config/lrvlsrvce.php') ?: $raw;
@@ -48,6 +49,6 @@ class LaravelServiceProvider extends ServiceProvider
     public function register()
     {
         // 
-        $this->app->singleton(ApiService::class, fn ($app) => new ApiService());
+        $this->app->singleton(ApiService::class, fn($app) => new ApiService());
     }
 }
