@@ -20,7 +20,7 @@ return [
     'api_url' => env('THIRD_PARTY_API', null),
     'api_token' => env('THIRD_PARTY_API_TOKEN', null),
 
-    'page_template' => <<<EOT
+    'page_template' => '
         <x-app-layout>
 
         <x-slot name="header">
@@ -52,6 +52,6 @@ return [
         </div>
 
     </x-app-layout>
-    EOT,
+    ',
 
 ];

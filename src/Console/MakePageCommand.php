@@ -36,13 +36,13 @@ class MakePageCommand extends Command
 
         File::ensureDirectoryExists(resource_path('views/pages'));
 
-        $template = config('lrvlsrvce.');
-        File::put($path, $template);
+        $template = config('lrvlsrvce.page_template');
+        // File::put($path, $template);
 
-        // $stub = <<<EOT
-        //     $template 
-        // EOT;
-        // File::put($path, $stub);
+        $stub = <<<EOT
+        $template 
+        EOT;
+        File::put($path, $stub);
 
         $this->info("Service {$name} created successfully.");
     }
