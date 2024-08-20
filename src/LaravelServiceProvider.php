@@ -6,6 +6,7 @@ use Yuricronos\LaravelService\Console\MakeServiceCommand;
 use Yuricronos\LaravelService\Services\ApiService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
+use Laravel\Lumen\Application as LumenApplication;
 use Illuminate\Support\Facades\URL;
 use Yuricronos\LaravelService\Console\MakePageCommand;
 use Yuricronos\LaravelService\Features\Livewire\SupportLivewireManager;
@@ -37,6 +38,12 @@ class LaravelServiceProvider extends ServiceProvider
             URL::forceRootUrl(config('lrvlsrvce.app_url'));
             if (str_contains(config('lrvlsrvce.app_url'), 'https://')) {
                 URL::forceScheme('https');
+            }
+        }
+        
+        if($this->app instanceof LumenApplication) {
+            if ($this->app->runningInConsole()) {
+                $this->commands([MakeServiceCommand::class]);
             }
         }
     }
